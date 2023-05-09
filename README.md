@@ -44,7 +44,7 @@ Here are some ideas to get you started:
 
 🏆 **my github stats:**
   
-|![](https://github-readme-stats.vercel.app/api?username=Sliverkiss)|![Sliverkiss's Most used languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact&hide_border=true&langs_count=10)|
+|![](https://github-readme-stats-ruby-one.vercel.app/api?username=Sliverkiss)|![Sliverkiss's Most used languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact&hide_border=true&langs_count=10)|
 |-|-|
 
 ![](https://raw.githubusercontent.com/anzhihe/anzhihe/main/assets/github-contribution-grid-snake.svg)
