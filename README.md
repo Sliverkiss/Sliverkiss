@@ -2,5 +2,5 @@
 ![GitHub账户信息统计](https://github-stats.ubrong.com/api?username=Sliverkiss&show_icons=true&theme=tokyonight)
 
 
-
+![GitHub仓库信息卡片](https://github-stats.ubrong.com/api/pin/?username=Sliverkiss&repo=helloworld&theme=dark)
 ![Visitor Count](https://profile-counter.glitch.me/{Sliverkiss}/count.svg)
