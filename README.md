@@ -6,4 +6,11 @@
 
 <div align="center"><img src="https://count.getloli.com/get/@NAME" alt="NAME" /></div>
 
+## My GitHub Contributions
+
 <div align="center"><img src="https://raw.githubusercontent.com/Achuan-2/Achuan-2/main/assets/github-contribution-grid-snake.svg" ></div>
+
+## My Github Activity Graph
+
+[![Sliverkiss's github activity graph](https://github-readme-activity-graph.cyclic.app/graph?username=Sliverkiss&theme=github)](https://github.com/yumuing/github-readme-activity-graph)
+
