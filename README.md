@@ -6,6 +6,11 @@
 
 <div align="center"><img src="https://count.getloli.com/get/@NAME" alt="NAME" /></div>
 
+<div align="center">
+    <img  height="150px" src="https://github-readme-stats.vercel.app/api?username=Sliverkiss&show_icons=true&count_private=true&hide=prs&theme=default_repocard" />
+    <img  height="150px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact" /> 
+</div>
+
 ## My GitHub Contributions
 
 <div align="center"><img src="https://raw.githubusercontent.com/Achuan-2/Achuan-2/main/assets/github-contribution-grid-snake.svg" ></div>
