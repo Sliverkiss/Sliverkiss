@@ -5,8 +5,7 @@
 <div align="center">
     <tr>
         <td width="50%"  align="center">
-      
-![Metrics](https://metrics.lecoq.io/sliverkiss?template=classic&base=header%2C%20activity%2C%20community%2C%20repositories%2C%20metadata&base.indepth=false&base.hireable=false&base.skip=false) 
+      <img  height="200px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact" />
         </td>
         <td valign="top" width="50%">
 
@@ -14,9 +13,6 @@
 
 <!-- blog starts -->
 * <a href='https://sliverkiss.github.io/2023/05/17/Hello-2023/' target='_blank' title='Hello world'>一段崭新生活的开始...</a> - 2023-05-17
-* 
-* 
-* 
 <!-- blog ends -->
 
 <div align="center"><img src="https://count.getloli.com/get/@NAME" alt="NAME" /></div>
@@ -24,17 +20,7 @@
     </tr>
     </div>
 </table>
-<table width="800px" align="center">
-<tr>
-<td valign="top" width="50%">
-    <div><img  height="200px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact" /> </div>
-    
-</td>
 
-
-</tr>
-
-</table>
 
 
 
