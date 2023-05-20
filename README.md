@@ -5,7 +5,7 @@
 <table width="800px">
 <tr>
 <td valign="top" width="50%">
-    <div><img  height="300px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact" /> </div>
+    <div><img  height="250px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sliverkiss&layout=compact" /> </div>
 </td>
 
 <td valign="top" width="50%">
