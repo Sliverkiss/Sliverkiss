@@ -3,12 +3,15 @@
 <table align="center">
 <div align="center">
     <tr>
-        <td width="50%" align="center">
+        <td  width="50%" align="center">
             <img src="https://count.getloli.com/get/@NAME" alt="NAME" />
         </td>
-        <td width="50%">
-            
+        <td width="50%"  align="center">
+
+  <h4>  
+      
 ![Metrics](https://metrics.lecoq.io/sliverkiss?template=classic&base=header%2C%20activity%2C%20community%2C%20repositories%2C%20metadata&base.indepth=false&base.hireable=false&base.skip=false)
+            </h4> 
         </td>
     </tr>
     </div>
