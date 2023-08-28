@@ -1,4 +1,52 @@
 /**************************************
+
+@Name：霸王茶姬小程序 签到 
+@Author：Sliverkiss
+@Date：2023-05-22 22:11:56               
+@tg频道: https://t.me/Sliverkiss          
+
+脚本兼容：Surge、QuantumultX、Loon、Shadowrocket、Node.js
+只测试过loon、青龙，其它环境请自行尝试
+
+*************************
+【 签到脚本使用教程 】:
+*************************
+
+青龙：
+1.抓包 https://webapi.qmai.cn/web/catering/integral/sign/signIn , 找到 Qm-User-Token和body，填写到bwcjCookie,多账号用 @ 分割
+2.若需要推送，则将bark的key填写到bark_key，只支持Bark推送。
+
+Loon: 
+1.复制Cookie脚本到本地
+2.打开小程序->我的->积分->积分签到，手动点击一次签到，若提示获取Cookie成功则可以使用该脚本
+3.关闭Cookie脚本
+
+*************************
+【 青龙--配置文件 】:
+*************************
+
+const $ =new Env("霸王茶姬")
+cron 15 9 * * *  bwcj_pro.js
+
+export bwcjCookie='Qm-User-Token&{"activityId":"XXXXX","mobilePhone":"XXXXX","userName":"XXXXX","appid":"XXXXX"}'
+
+多账号用 @ 分割
+抓包 https://webapi.qmai.cn/web/catering/integral/sign/signIn , 找到 Qm-User-Token和body 即可
+
+*************************
+【 Loon 脚本配置 】:
+*************************
+
+[Script]
+cron "10 8 * * *" script-path=https://raw.githubusercontent.com/Sliverkiss/helloworld/master/Study/bwcj_pro.js, timeout=10, tag=霸王茶姬
+http-request ^https?:\/\/webapi\.qmai\.cn\/web\/catering\/integral\/sign\/signIn script-path=https://raw.githubusercontent.com/Sliverkiss/helloworld/master/Study/bwcj_pro.js, requires-body=true, timeout=10, tag=霸王茶姬获取token
+
+[MITM]
+hostname =webapi.qmai.cn
+
+====================================
+
+⚠️【免责声明】
 ------------------------------------------
 1、此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
 2、由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
@@ -9,6 +57,7 @@
 7、所有直接或间接使用、查看此脚本的人均应该仔细阅读此声明。本人保留随时更改或补充此声明的权利。一旦您使用或复制了此脚本，即视为您已接受此免责声明。
 
 ******************************************/
+
 
 // env.js 全局
 const $ = new Env("沪上阿姨");
@@ -29,12 +78,19 @@ $.barkKey = ($.isNode() ? process.env["bark_key"] : $.getdata("bark_key")) || ''
 
 //脚本入口函数main()
 async function main() {
-    //远程通知
-    await getNotice();
-    console.log('\n================== 任务 ==================\n');
+    console.log('\n============= 用户CK有效性验证 =============\n');
     let taskall = [];
     for (let user of userList) {
-        if (user.ckStatus == true) {
+        // console.log(`随机延迟${user.getRandomTime()}ms`);
+        console.log(`🔷账号${user.index} >> Start check CK`)
+        taskall.push(await user.check());
+        await $.wait(user.getRandomTime()); //延迟  1秒  可充分利用 $.环境函数
+    }
+    await Promise.all(taskall);
+    console.log('\n================== 任务 ==================\n');
+    taskall = [];
+    for (let user of userList) {
+        if (user.ckStatus) {
             //ck未过期，开始执行任务
             DoubleLog(`🔷账号${user.index} >> Start work`)
             console.log(`随机延迟${user.getRandomTime()}ms`);
@@ -53,20 +109,16 @@ async function main() {
 class UserInfo {
     constructor(str) {
         this.index = ++userIdx;
-        this.ck = str;
-        this.ckStatus = true;
-        this.readStatus= true;
+        this.token = str;
+        this.body ="{\"activityId\":\"702822503017398273\",\"mobilePhone\":\"root\",\"userName\":\"微信用户\",\"appid\":\"wxd92a2d29f8022f40\"}" 
+        //let ck = str.split('&')
+        //this.data1 = ck[0]
+        this.ckStatus = true
         this.headers = {
-                'Qm-User-Token':this.ck,
-                'Qm-From':'wechat',
-                'Content-Type':'application/json'
-        };
-        this.body={
-            "appid": "wxd92a2d29f8022f40",
-            "mobilePhone":" ",
-            "activityId":"702822503017398273",
-            "userName":" "
-        };
+            'Qm-User-Token': this.token,
+            'Qm-From': 'wechat',
+            'content-type': 'application/json'
+        }
     }
     getRandomTime() {
         return randomInt(1000, 3000)
@@ -81,47 +133,70 @@ class UserInfo {
                 headers: this.headers,
                 body: this.body
             };
-             //post方法
-             $.post(options, (error, response, data) => {
-                var result = JSON.parse(data);
-                 if (result?.code==0) {
-                    DoubleLog(`✅${result?.message}`);   
-                 }else{
-                    DoubleLog(`🔶${result?.message || '❌签到失败！'}`);   
-                    console.log(result)
-                 }
-             });
-        } catch (e) {
-            console.log(e);
-        }
-    }
-     //查询积分
-    async point(){
-        try {
-            const options = {
-                url: `https://webapi.qmai.cn/web/catering/crm/points-info`,
-                //请求头, 所有接口通用
-                headers: this.headers,
-                body: this.body
-            };
             //post方法
-             $.post(options, (error, response, data) => {
-                var result = JSON.parse(data);
-                console.log(result)
-                DoubleLog(`✅目前积分为${result?.data?.totalPoints}`);
-             });
+            let result = await httpRequest(options);
+            if (result?.code == 0) {
+                //obj.error是0代表完成
+                DoubleLog(`✅签到成功！`);
+            } else {
+                DoubleLog(`🔶${result?.message}`)
+                console.log(result);
+            }
         } catch (e) {
             console.log(e);
         }
     }
-    
+    //查询积分
+    async point() {
+        let signinRequest = {
+            //签到任务调用签到接口
+            url: `https://webapi.qmai.cn/web/catering/crm/points-info`,
+            //请求头, 所有接口通用
+            headers: this.headers,
+            body: '{}'
+        };
+        //post方法
+        let result = await httpRequest(signinRequest);
+        if (result?.code == 0) {
+            //obj.error是0代表完成
+            DoubleLog(`✅查询成功:${result?.data?.totalPoints}积分`);
+        } else {
+            $.log(`🔶${result}`)
+        }
+    }
+
+    //检查用户ck是否失效
+    async check() {
+        let signinRequest = {
+            //签到任务调用签到接口
+            url: `https://webapi.qmai.cn/web/catering/crm/points-info`,
+            //请求头, 所有接口通用
+            headers: this.headers,
+            body: '{}'
+        };
+        //post方法
+        let result = await httpRequest(signinRequest);
+
+        if (result?.code == '10008') {
+            //obj.error是0代表完成
+            this.ckStatus = false;
+            console.log(`❌账号${this.index} >> check ck error!`)
+        } else {
+            console.log(`✅check success!`)
+        }
+    }
+
 }
+
+
 //获取Cookie
 async function getCookie() {
     if ($request && $request.method != 'OPTIONS') {
-        const ckVal = $request.headers['Token'] || $request.headers['token'] || $request.headers['TOOKEN']
-        if (ckVal) {
-            $.setdata(ckVal, ckName);
+        const bodyValue = $request.body;
+        const tokenValue = $request.headers['Qm-User-Token'] || $.request.headers['qm-user-token'] || $.request.headers['QM-USER-TOKEN'];
+        if (bodyValue && tokenValue) {
+            $.setdata(tokenValue, env_token);
+            $.setjson(bodyValue, env_body)
             $.msg($.name, "", "获取签到Cookie成功🎉");
         } else {
             $.msg($.name, "", "错误获取签到Cookie失败");
@@ -137,17 +212,16 @@ async function getCookie() {
         return;
     }
     //未检测到ck，退出
-    if (!(await checkEnv())) { throw new Error(`❌未检测到ck，请添加环境变量`) };
+    if (!(await checkEnv())) {throw new Error(`❌未检测到ck，请添加环境变量`)};
     if (userList.length > 0) {
         await main();
     }
-    //通知
-    if ($.barkKey) { //如果已填写Bark Key
-        await BarkNotify($, $.barkKey, $.name, $.notifyMsg.join('\n')); //推送Bark通知
-    };
 })()
     .catch((e) => $.notifyMsg.push(e.message || e))//捕获登录函数等抛出的异常, 并把原因添加到全局变量(通知)
     .finally(async () => {
+        if ($.barkKey) { //如果已填写Bark Key
+            await BarkNotify($, $.barkKey, $.name, $.notifyMsg.join('\n')); //推送Bark通知
+        };
         await SendMsg($.notifyMsg.join('\n'))//带上总结推送通知
         $.done(); //调用Surge、QX内部特有的函数, 用于退出脚本执行
     });
@@ -214,23 +288,6 @@ async function SendMsg(message) {
     }
 }
 
-async function getNotice() {
-    try{
-        const urls=["https://raw.githubusercontent.com/Sliverkiss/GoodNight/main/notice.json","https://raw.githubusercontent.com/Sliverkiss/GoodNight/main/tip.json"];
-        for(const url of urls){
-            const options={
-                url,
-                headers:{
-                    "User-Agent":""
-                },
-            }
-            const result=await httpRequest(options);
-            if(result) console.log(result.notice);
-        }
-    }catch (e) {
-        console.log(e);
-    }
-} 
 /** ---------------------------------固定不动区域----------------------------------------- */
 // prettier-ignore
 
