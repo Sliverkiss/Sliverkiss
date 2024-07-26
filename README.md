@@ -1,6 +1,8 @@
-<h1><a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=F6A4F7&width=435&lines=hello%2CI%E2%80%99m+sliverkiss" alt="Typing SVG" /></a></h1>
+<h1 align="center">
 
+  ![Profile](https://github-widgetbox.vercel.app/api/profile?username=Sliverkiss&data=followers,repositories,stars,commits)
 
+</h1>
 <table align="center">
 <div align="center">
     <tr>
@@ -28,7 +30,11 @@
 
 <div align="center"><img src="https://raw.githubusercontent.com/Achuan-2/Achuan-2/main/assets/github-contribution-grid-snake.svg" ></div>
 
-## My Github Activity Graph
+## My Gtihub Trohpy
 
-[![Sliverkiss's github activity graph](https://github-readme-activity-graph.cyclic.app/graph?username=Sliverkiss&theme=github)](https://github.com/yumuing/github-readme-activity-graph)
+<div align="center">
+
+![](https://github-profile-trophy.vercel.app/?username=Sliverkiss)
+
+</div>
 
