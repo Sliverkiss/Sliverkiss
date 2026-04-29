@@ -169,9 +169,9 @@ Custom web scraping scripts powered by DrissionPage — practical data collectio
 ┌─────────────────────────────────────────────────────────┐
 │                                                         │
 │   🔬 JS Reverse Engineering    ████████████░░  80%      │
-│   📱 iOS Automation Scripts    ██████████████  100%      │
+│   📱 iOS Automation Scripts    ██████████████  100%     │
 │   🤖 Telegram Bot Development  ██████████░░░░  70%      │
-│   ☁️  Serverless / CF Workers   ████████░░░░░░  60%      │
+│   ☁️  Serverless / CF Workers   ████████░░░░░░  60%     │
 │   🧠 MCP Protocol & AI Tools   ████████████░░  80%      │
 │   📊 Crypto & Data Pipeline    ██████░░░░░░░░  40%      │
 │                                                         │
